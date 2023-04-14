@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="report_etiqueta_personalizada">
+    <t t-call="web.html_container">
+      <!-- <t t-foreach="docs" t-as="o"> -->
+
+        <div class="article">
+          <div class="page">
+            <t t-foreach="docs" t-as="o">
+
+              <div style="width:10.1cm; height:8.4cm; float:left; margin-left:1cm; margin-bottom:1cm" >
+
+                <div style="width:100%; height:auto;font-size: 10px;">
+                  <table style="width:100%; border:0px solid white;font-size: 10px;">
+                    <tr>
+                      <td>
+                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="width:150px; height:50px"/>
+                      </td>
+                      <td>
+                        Dirección ................
+                      </td>
+                      <td>
+                        Transportista
+                      </td>
+                    </tr>
+                  </table>
+
+                </div>
+
+                <div style="width:100%; height:auto">
+                  <table style="width:100%; font-size: 10px; text-align:center">
+                    <tr >
+                      <td text-align="center" font-size="5px" style="vertical-align: middle; border:1px solid white; border-right:1px solid black">
+                        <t style="font-size:5px" t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M')"/>
+                      </td>
+                      <td text-align="center">
+                        <STRONG>Plataforma </STRONG>
+                      </td>
+                      <td text-align="center">
+                        <STRONG>Operador | Empacador</STRONG><br/>
+                      </td>
+                      <td text-align="center">
+                        <STRONG>Pedido N</STRONG><br/>
+                        <h5><t t-esc="o.name"/></h5>
+                      </td>
+                    </tr>
+                  </table>
+
+                </div>
+
+                <div style="width:100%; height:auto; border-top: 1px solid black; ; border-bottom: 1px solid black; text-align:center; margin-bottom:10px">
+                  <h5 text-align="center">
+                    DESTINATARIO
+                  </h5>
+                </div>
+
+                <div style="height:auto; width:100%">
+                  <div style="width:20%; height: auto; float:left">
+                  </div>
+                  <div style="width:80%; height: auto; float:right">
+                    <table style="width:99%; border: 0px solid white;font-size:10px;">
+                      <tr>
+                        <td>Nombre:</td>
+                        <td>
+                          <t t-esc="o.partner_id.name"/>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Dirección:</td>
+                        <td>
+                          <t t-esc="o.partner_id.street"/>
+                          <t t-esc="o.partner_id.street2"/>
+                          <t t-esc="o.partner_id.city"/>
+                          <t t-esc="o.partner_id.state_id.name"/>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Telefono:</td>
+                        <td>
+                          <t t-esc="o.partner_id.phone"/>
+                        </td>
+                        <td style="text-align:center; border-top:1px solid black; border-left: 1px solid black">
+                          <STRONG><t t-esc="dicc_etiquetas[o.id]['nombre_paquetes']"/></STRONG>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+
+                </div>
+
+                <table style="width:99%; font-size:10px; border:none; margin:auto; float:center" >
+                  <tr style="border:1px solid white; border-top:1px solid white">
+                    <td style="border-top:1px solid black">
+                      Item
+                    </td>
+                    <td style="border-top:1px solid black">
+                      Cant.
+                    </td>
+                    <td style="border-top:1px solid black">
+                      Código
+                    </td>
+                    <td style="border-top:1px solid black">
+                      Descripción
+                    </td>
+                  </tr>
+
+                  <t t-foreach="o.picking_ids.move_ids_without_package" t-as="line">
+                    <tr style="border:none; margin:auto">
+                      <td style="border:1px solid white">
+                        <t t-esc="line.product_id.id"/>
+                      </td>
+                      <td style="border:1px solid white">
+                        <t t-esc="line.product_uom_qty"/>
+                      </td>
+                      <td style="border:1px solid white">
+                        <t t-esc="line.product_id.default_code"/>
+                      </td>
+                      <td style="border:1px solid white">
+                        <t t-esc="line.product_id.name"/>
+                      </td>
+                    </tr>
+
+                  </t>
+
+                </table>
+
+                <div style="width:100px; border:1px solid black; float:right">
+                  <div style="width:100%; border:1px solid black; font-size:10px">
+                    Paquete no°:
+                    <h5>
+
+                    </h5>
+                  </div>
+                  <div style="width:100%; border:1px solid black; font-size:10px">
+                    De:
+                    <h5 style="text-align:center">
+                      <STRONG><t t-esc="o.picking_ids.x_studio_numero_de_paquetes"/></STRONG>
+                    </h5>
+                  </div>
+                </div>
+
+              </div>
+
+            </t>
+            <!-- <div style=" width:100%; height:auto; border:1px solid black; position: relative">
+              <div style="width:50%; height:100%; border:1px solid black; float:right">
+              </div>
+            </div> -->
+
+
+
+
+          </div>
+        </div>
+
+      <!-- </t> -->
+    </t>
+  </template>
+</odoo>
