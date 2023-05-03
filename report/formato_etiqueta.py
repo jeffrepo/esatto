@@ -27,6 +27,7 @@ class ReportEsattoEtiqueta(models.AbstractModel):
                     dicc_etiquetas[linea_materiales.x_studio_paquete]={
                     'numero_paquete': linea_materiales.x_studio_paquete,
                     'numero_paquetes': sale.picking_ids.x_studio_numero_de_paquetes,
+                    'pedido': sale,    
                     'productos':[]
                     }
                 dicc_etiquetas[linea_materiales.x_studio_paquete]['productos'].append(linea_materiales)
