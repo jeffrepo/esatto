@@ -18,12 +18,14 @@
                         <td>
                           <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="width:150px; height:50px"/>
                         </td>
-                        <td>
-                          Dirección ................
+                        <td style="text-align:left">
+                          <span t-field="o.company_id.street"/><span t-field="o.company_id.street2"/><br/>
+                          C.P. <span t-field="o.company_id.zip"/> - <span t-field="o.company_id.city"/> - <span t-field="o.company_id.state_id.name"/> <span t-field="o.company_id.website"/> <br/>
+                          T. <span t-field="o.company_id.phone"/>  
                         </td>
-                        <td>
+                        <td style="padding-left:10px">
                           Transportista <br/>
-                          <t t-esc="o.x_studio_transportista"/>
+                          <span t-esc="o.x_studio_transportista"/>
                         </td>
                       </tr>
                     </table>
@@ -38,9 +40,11 @@
                         </td>
                         <td text-align="center">
                           <STRONG>Plataforma </STRONG>
+                           <br/><span t-field="o.x_studio_pedido_plataforma"/> 
                         </td>
                         <td text-align="center">
                           <STRONG>Operador | Empacador</STRONG><br/>
+                           <span t-field="o.x_studio_operador_empacador"/> 
                         </td>
                         <td text-align="center">
                           <STRONG>Pedido N</STRONG><br/>
