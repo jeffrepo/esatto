@@ -6,7 +6,7 @@
 
         <div class="article">
           <div class="page">
-            <t t-foreach="docs" t-as="o">
+            <!-- <t t-foreach="docs" t-as="o">-->
 
               <t t-foreach="dicc_etiquetas" t-as="e">
 
@@ -16,16 +16,16 @@
                     <table style="width:100%; border:0px solid white;font-size: 10px;">
                       <tr>
                         <td>
-                          <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo" style="width:150px; height:50px"/>
+                          <img t-if="dicc_etiquetas[e]['pedido'].company_id.logo" t-att-src="image_data_uri(dicc_etiquetas[e]['pedido'].company_id.logo)" alt="Logo" style="width:150px; height:50px"/>
                         </td>
                         <td style="text-align:left">
-                          <span t-field="o.company_id.street"/><span t-field="o.company_id.street2"/><br/>
-                          C.P. <span t-field="o.company_id.zip"/> - <span t-field="o.company_id.city"/> - <span t-field="o.company_id.state_id.name"/> <span t-field="o.company_id.website"/> <br/>
-                          T. <span t-field="o.company_id.phone"/>  
+                          <span t-field="dicc_etiquetas[e]['pedido'].company_id.street"/><span t-field="dicc_etiquetas[e]['pedido'].company_id.street2"/><br/>
+                          C.P. <span t-field="dicc_etiquetas[e]['pedido'].company_id.zip"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.city"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.state_id.name"/> <span t-field="dicc_etiquetas[e]['pedido'].company_id.website"/> <br/>
+                          T. <span t-field="dicc_etiquetas[e]['pedido'].company_id.phone"/>  
                         </td>
                         <td style="padding-left:10px">
                           Transportista <br/>
-                          <span t-esc="o.x_studio_transportista"/>
+                          <span t-esc="dicc_etiquetas[e]['pedido'].x_studio_transportista"/>
                         </td>
                       </tr>
                     </table>
@@ -40,15 +40,15 @@
                         </td>
                         <td text-align="center">
                           <STRONG>Plataforma </STRONG>
-                           <br/><span t-field="o.x_studio_pedido_plataforma"/> 
+                           <br/><span t-field="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma"/> 
                         </td>
                         <td text-align="center">
                           <STRONG>Operador | Empacador</STRONG><br/>
-                           <span t-field="o.x_studio_operador_empacador"/> 
+                           <span t-field="dicc_etiquetas[e]['pedido'].x_studio_operador_empacador"/> 
                         </td>
                         <td text-align="center">
                           <STRONG>Pedido N</STRONG><br/>
-                          <h5><t t-esc="o.name"/></h5>
+                          <h5><t t-esc="dicc_etiquetas[e]['pedido'].name"/></h5>
                         </td>
                       </tr>
                     </table>
@@ -69,22 +69,22 @@
                         <tr>
                           <td>Nombre:</td>
                           <td>
-                            <t t-esc="o.partner_id.name"/>
+                            <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.name"/>
                           </td>
                         </tr>
                         <tr>
                           <td>Dirección:</td>
                           <td>
-                            <t t-esc="o.partner_id.street"/>
-                            <t t-esc="o.partner_id.street2"/>
-                            <t t-esc="o.partner_id.city"/>
-                            <t t-esc="o.partner_id.state_id.name"/>
+                            <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.street"/>
+                            <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.street2"/>
+                            <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.city"/>
+                            <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.state_id.name"/>
                           </td>
                         </tr>
                         <tr>
                           <td>Telefono:</td>
                           <td>
-                            <t t-esc="o.partner_id.phone"/>
+                            <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.phone"/>
                           </td>
                           <td style="text-align:center; border-top:1px solid black; border-left: 1px solid black">
                             <STRONG>
@@ -152,7 +152,7 @@
 
 
 
-            </t>
+           <!-- </t>-->
 
           </div>
         </div>
