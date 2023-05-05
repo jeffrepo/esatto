@@ -3,7 +3,10 @@
 from odoo import api, models
 from datetime import date
 from datetime import datetime, date, time, timedelta
+import re
+from html.parser import HTMLParser
 import logging
+from bs4 import BeautifulSoup
 
 class ReportEsattoEtiqueta(models.AbstractModel):
     _name = 'reporte.esatto.etiqueta'
@@ -17,22 +20,44 @@ class ReportEsattoEtiqueta(models.AbstractModel):
 
         logging.warning('Vamos a crear un dicc')
 
-        logging.warning(self)
-        logging.warning(docs)
-        logging.warning(docs.picking_ids)
 
+        paquetes = []
         for sale in docs:
-            for linea_materiales in sale.picking_ids.move_ids_without_package:
-                if linea_materiales.x_studio_paquete not in dicc_etiquetas:
-                    dicc_etiquetas[linea_materiales.x_studio_paquete]={
-                    'numero_paquete': linea_materiales.x_studio_paquete,
-                    'numero_paquetes': sale.picking_ids.x_studio_numero_de_paquetes,
-                    'pedido': sale,    
-                    'productos':[]
-                    }
-                dicc_etiquetas[linea_materiales.x_studio_paquete]['productos'].append(linea_materiales)
+            direccion_texto = ""
+            contador_dir = 1
+            for i in re.findall("<p>(.*?)</p>",str(sale.note)):
+                if contador_dir == 2:
+                    direccion_texto = i
+                contador_dir += 1
+            lista_materiales_lista = []
+            logging.warning(direccion_texto)
+            if sale.id not in dicc_etiquetas:
+                for linea_venta in sale.order_line:
+                    if linea_venta.product_id.bom_ids:
+                        lista_materiales_lista.append(linea_venta.product_id.bom_ids.product_tmpl_id.name)
+                
+                lista_materiales_join = ','.join(lista_materiales_lista)
+                dicc_etiquetas[sale.id] = {'paquetes': {}, 'plataforma': sale.origin.split('-')[1],'direccion_texto': direccion_texto[10:], 'pedido': sale, 'lista_materiales_join': lista_materiales_join}
+            
+            if sale.picking_ids:
+                
+                for envio in sale.picking_ids:
+                    if envio.move_ids_without_package:
+                        dicc_etiquetas[sale.id]['numero_paquetes'] = envio.x_studio_numero_de_paquetes
+                        for linea_m in envio.move_ids_without_package:
+                            if linea_m.x_studio_paquete not in dicc_etiquetas[sale.id]['paquetes']:
+                                dicc_etiquetas[sale.id]['paquetes'][linea_m.x_studio_paquete] = {'numero_paquete': linea_m.x_studio_paquete,'moves':[],'plataforma': sale.origin.split('-')[1],'direccion_texto': direccion_texto[10:], 'pedido': sale}
+                                
+                            dicc_etiquetas[sale.id]['paquetes'][linea_m.x_studio_paquete]['moves'].append(linea_m)
+        
+            logging.warning('sale')
+            logging.warning(dicc_etiquetas)
+            
+            
 
 
+        logging.warning('sale')
+        logging.warning(dicc_etiquetas)
             # logging.warning(sale.name)
             # if sale.id not in dicc_etiquetas:
             #     dicc_etiquetas[sale.id]={
