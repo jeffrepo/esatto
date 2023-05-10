@@ -12,13 +12,13 @@
               <t t-foreach="dicc_etiquetas" t-as="e">
                   <t t-foreach="dicc_etiquetas[e]['paquetes']" t-as="paquete">
 
-                    <div style="width:10.1cm; height:8.4cm; float:left; margin-left:1cm; margin-bottom:1cm" >
+                    <div style="width:10.1cm; height:8.4cm; float:left; margin-left:1cm; margin-bottom:1cm; position: relative" >
 
                       <div style="width:100%; height:auto;font-size: 7px;">
                         <table style="width:100%; border:0px solid white;font-size: 7px;">
                           <tr>
                             <td>
-                              <center><img t-if="dicc_etiquetas[e]['pedido'].company_id.logo" t-att-src="image_data_uri(dicc_etiquetas[e]['pedido'].company_id.logo)" alt="Logo" style="margin-top:15px;width:100px; height:25px"/></center>
+                              <center><img t-if="dicc_etiquetas[e]['pedido'].company_id.logo" t-att-src="image_data_uri(dicc_etiquetas[e]['pedido'].company_id.logo)" alt="Logo" style="width:60%;margin-top:15px"/></center>
                             </td>
                             <td style="text-align:left">
                               <span t-field="dicc_etiquetas[e]['pedido'].company_id.street"/><span t-field="dicc_etiquetas[e]['pedido'].company_id.street2"/><br/>
@@ -38,21 +38,21 @@
                         <table style="width:100%; font-size: 7px; text-align:center">
                           <tr >
                             <td text-align="center" font-size="7px" style="vertical-align: middle; border:1px solid white; border-right:1px solid black">
-                              <t style="font-size:7px" t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M')"/>
+                              <t style="font-size:7px" t-esc="fecha_hoy"/>
                             </td>
                             <td text-align="center" style="font-size:7px">
                               <STRONG>Plataforma </STRONG>
                                <br/>
                                 <t t-if="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma">
-                                    <span t-field="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma" style="font-size:7px"/>
+                                    <span t-field="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma" style="font-size:10px"/>
                                 </t>
                                 <t t-else="">
-                                    <span t-esc="dicc_etiquetas[e]['plataforma']" style="font-size:7px"/>
+                                    <span t-esc="dicc_etiquetas[e]['plataforma']" style="font-size:10px"/>
                                 </t>
                             </td>
                             <td text-align="center" style="font-size:7px">
                               <STRONG>Operador | Empacador</STRONG><br/>
-                               <span t-field="dicc_etiquetas[e]['pedido'].x_studio_operador_empacador"/>
+                               <span t-field="dicc_etiquetas[e]['pedido'].x_studio_operador_empacador" style="font-size:10px"/>
                             </td>
                             <td text-align="center" style="font-size:7px">
                               <STRONG>Pedido N</STRONG><br/>
@@ -73,7 +73,7 @@
                         <div style="width:20%; height: auto; float:left">
                         </div>
                         <div style="width:80%; height: auto; float:right">
-                          <table style="width:99%; border: 0px solid white;font-size:7px;">
+                          <table style="width:99%; border: 0px solid white;font-size:10px;">
                             <tr>
                               <td>Nombre:</td>
                               <td>
@@ -101,7 +101,6 @@
                         </div>
 
                       </div>
-                        <br/>
                         <br/>
                         <br/>
                       <table style="width:99%; font-size:7px; border:none; margin:auto; float:center" >
@@ -140,7 +139,7 @@
 
                       </table>
 
-                      <div style="width:100px; border:1px solid black; float:right">
+                    <div style="width:100px; border:1px solid black;  margin-top: 1px;position:absolute ; right: 0;bottom:0;">
                         <div style="width:100%; border:1px solid black; font-size:7px">
                           Paquete no°:
                           <h6 style="text-align:center">
