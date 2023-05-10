@@ -91,7 +91,7 @@
                               <td>
                                 <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.phone"/>
                               </td>
-                              <td style="text-align:center; border-top:1px solid black; border-left: 1px solid black">
+                              <td style="text-align:center;">
                                 <STRONG>
                                   <!-- <t t-esc="dicc_etiquetas[o.id]['names']"/> -->
                                 </STRONG>
