@@ -3,165 +3,317 @@
   <template id="report_etiqueta_personalizada">
     <t t-call="web.html_container">
       <!-- <t t-foreach="docs" t-as="o"> -->
-        <t t-set="data_report_margin_top" t-value="12"/>
+        <t t-set="data_report_margin_top" t-value="15"/>
         <t t-set="data_report_header_spacing" t-value="9"/>
         <div class="article">
           <div class="page">
-            <!-- <t t-foreach="docs" t-as="o">-->
-
+              <div style="height:1.5cm"/>
               <t t-foreach="dicc_etiquetas" t-as="e">
                   <t t-foreach="dicc_etiquetas[e]['paquetes']" t-as="paquete">
+                    
+                    
+                    <t t-if="dicc_etiquetas[e]['paquetes'][paquete]['correr_espacio_paquete'] == 2">
+                        
+                        <div style="width:10.1cm; height:8.90cm; float:left; margin-bottom:1cm;margin-left:2.25cm;position: relative">
+                          
+                          <div style="width:100%; height:auto;font-size: 7px;">
+                            <table style="width:100%; border:0px solid white;font-size: 7px;">
+                              <tr>
+                                <td>
+                                  <center><img t-if="dicc_etiquetas[e]['pedido'].company_id.logo" t-att-src="image_data_uri(dicc_etiquetas[e]['pedido'].company_id.logo)" alt="Logo" style="width:60%;margin-top:15px"/></center>
+                                </td>
+                                <td style="text-align:left">
+                                  <span t-field="dicc_etiquetas[e]['pedido'].company_id.street"/><span t-field="dicc_etiquetas[e]['pedido'].company_id.street2"/><br/>
+                                  C.P. <span t-field="dicc_etiquetas[e]['pedido'].company_id.zip"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.city"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.state_id.name"/> <span t-field="dicc_etiquetas[e]['pedido'].company_id.website"/> <br/>
+                                  T. <span t-field="dicc_etiquetas[e]['pedido'].company_id.phone"/>
+                                </td>
+                                <td style="padding-left:7px">
+                                  Transportista <br/>
+                                  <span t-esc="dicc_etiquetas[e]['pedido'].x_studio_transportista"/>
+                                </td>
+                              </tr>
+                            </table>
 
-                    <div style="width:10.1cm; height:8.4cm; float:left; margin-left:1cm; margin-bottom:1cm; position: relative" >
+                          </div>
 
-                      <div style="width:100%; height:auto;font-size: 7px;">
-                        <table style="width:100%; border:0px solid white;font-size: 7px;">
-                          <tr>
-                            <td>
-                              <center><img t-if="dicc_etiquetas[e]['pedido'].company_id.logo" t-att-src="image_data_uri(dicc_etiquetas[e]['pedido'].company_id.logo)" alt="Logo" style="width:60%;margin-top:15px"/></center>
-                            </td>
-                            <td style="text-align:left">
-                              <span t-field="dicc_etiquetas[e]['pedido'].company_id.street"/><span t-field="dicc_etiquetas[e]['pedido'].company_id.street2"/><br/>
-                              C.P. <span t-field="dicc_etiquetas[e]['pedido'].company_id.zip"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.city"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.state_id.name"/> <span t-field="dicc_etiquetas[e]['pedido'].company_id.website"/> <br/>
-                              T. <span t-field="dicc_etiquetas[e]['pedido'].company_id.phone"/>
-                            </td>
-                            <td style="padding-left:7px">
-                              Transportista <br/>
-                              <span t-esc="dicc_etiquetas[e]['pedido'].x_studio_transportista"/>
-                            </td>
-                          </tr>
-                        </table>
+                          <div style="width:100%; height:auto">
+                            <table style="width:100%; font-size: 7px; text-align:center">
+                              <tr>
+                                <td text-align="center" font-size="7px" style="vertical-align: middle; border:1px solid white; border-right:1px solid black">
+                                  <t style="font-size:7px" t-esc="fecha_hoy"/>
+                                </td>
+                                <td text-align="center" style="font-size:7px">
+                                  <STRONG>PLATAFORMA </STRONG>
+                                   <br/>
+                                    <t t-if="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma">
+                                        <span t-field="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma" style="font-size:10px"/>
+                                    </t>
+                                    <t t-else="">
+                                        <span t-esc="dicc_etiquetas[e]['plataforma']" style="font-size:10px"/>
+                                    </t>
+                                </td>
+                                <td text-align="center" style="font-size:7px">
+                                  <STRONG>OPERADOR | EMPACADOR</STRONG><br/>
+                                   <span t-field="dicc_etiquetas[e]['pedido'].x_studio_operador_empacador" style="font-size:10px"/>
+                                </td>
+                                <td text-align="center" style="font-size:7px">
+                                  <STRONG>PEDIDO N</STRONG><br/>
+                                  <h6><t t-esc="dicc_etiquetas[e]['pedido'].name"/></h6>
+                                </td>
+                              </tr>
+                            </table>
 
-                      </div>
+                          </div>
 
-                      <div style="width:100%; height:auto">
-                        <table style="width:100%; font-size: 7px; text-align:center">
-                          <tr >
-                            <td text-align="center" font-size="7px" style="vertical-align: middle; border:1px solid white; border-right:1px solid black">
-                              <t style="font-size:7px" t-esc="fecha_hoy"/>
-                            </td>
-                            <td text-align="center" style="font-size:7px">
-                              <STRONG>Plataforma </STRONG>
-                               <br/>
-                                <t t-if="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma">
-                                    <span t-field="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma" style="font-size:10px"/>
-                                </t>
-                                <t t-else="">
-                                    <span t-esc="dicc_etiquetas[e]['plataforma']" style="font-size:10px"/>
-                                </t>
-                            </td>
-                            <td text-align="center" style="font-size:7px">
-                              <STRONG>Operador | Empacador</STRONG><br/>
-                               <span t-field="dicc_etiquetas[e]['pedido'].x_studio_operador_empacador" style="font-size:10px"/>
-                            </td>
-                            <td text-align="center" style="font-size:7px">
-                              <STRONG>Pedido N</STRONG><br/>
-                              <h6><t t-esc="dicc_etiquetas[e]['pedido'].name"/></h6>
-                            </td>
-                          </tr>
-                        </table>
+                          <div style="width:100%; height:auto; border-top: 1px solid black; ; border-bottom: 1px solid black; text-align:center; margin-bottom:7px">
+                            <h7 text-align="center">
+                              DESTINATARIO
+                            </h7>
+                          </div>
 
-                      </div>
+                          <div style="height:auto; width:100%">
+                            <div style="width:20%; height: auto; float:left">
+                            </div>
+                            <div style="width:80%; height: auto; float:right">
+                              <table style="width:99%; border: 0px solid white;font-size:10px;">
+                                <tr>
+                                  <td>NOMBRE:</td>
+                                  <td>
+                                    <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.name.upper()"/>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>DIRECCIÓN:</td>
+                                  <td>
+                                    <t t-esc="dicc_etiquetas[e]['direccion_texto'].upper()"/> C.P. <span t-esc="dicc_etiquetas[e]['pedido'].partner_id.zip"/>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>TELÉFONO:</td>
+                                  <td>
+                                    <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.phone"/>
+                                  </td>
+                                  <td style="text-align:center;">
+                                    <STRONG>
+                                      <!-- <t t-esc="dicc_etiquetas[o.id]['names']"/> -->
+                                    </STRONG>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
 
-                      <div style="width:100%; height:auto; border-top: 1px solid black; ; border-bottom: 1px solid black; text-align:center; margin-bottom:7px">
-                        <h7 text-align="center">
-                          DESTINATARIO
-                        </h7>
-                      </div>
+                          </div>
+                            <br/>
+                            <br/>
+                          <table style="width:99%; font-size:7px; border:none; margin:auto; float:center">
 
-                      <div style="height:auto; width:100%">
-                        <div style="width:20%; height: auto; float:left">
-                        </div>
-                        <div style="width:80%; height: auto; float:right">
-                          <table style="width:99%; border: 0px solid white;font-size:10px;">
-                            <tr>
-                              <td>Nombre:</td>
+                            <tr style="border:1px solid white; border-top:1px solid white">
+                              <td style="border-top:1px solid black" colspan="4">
+                                <strong><span t-esc="dicc_etiquetas[e]['lista_materiales_join']"/></strong>
+                              </td>
+
+                            </tr>
+                            <tr style="border:1px solid white">
                               <td>
-                                <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.name"/>
+                                Cant.
+                              </td>
+                              <td>
+                                Código
+                              </td>
+                              <td>
+                                Descripción
                               </td>
                             </tr>
-                            <tr>
-                              <td>Dirección:</td>
-                              <td>
-                                <t t-esc="dicc_etiquetas[e]['direccion_texto']"/> C.P. <span t-esc="dicc_etiquetas[e]['pedido'].partner_id.zip"/>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Telefono:</td>
-                              <td>
-                                <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.phone"/>
-                              </td>
-                              <td style="text-align:center;">
-                                <STRONG>
-                                  <!-- <t t-esc="dicc_etiquetas[o.id]['names']"/> -->
-                                </STRONG>
-                              </td>
-                            </tr>
+
+                            <t t-foreach="dicc_etiquetas[e]['paquetes'][paquete]['moves']" t-as="linea">
+                              <tr style="border:1px solid white">
+                                <td style="border:1px solid white">
+                                  <t t-esc="linea.product_uom_qty"/>
+                                </td>
+                                <td style="border:1px solid white">
+                                  <t t-esc="linea.product_id.default_code"/>
+                                </td>
+                                <td style="border:1px solid white">
+                                  <t t-esc="linea.product_id.name"/>
+                                </td>
+                              </tr>
+                            </t>
+
                           </table>
-                        </div>
 
-                      </div>
-                        <br/>
-                        <br/>
-                      <table style="width:99%; font-size:7px; border:none; margin:auto; float:center" >
+                        <div style="width:100px; border:1px solid black;  margin-top: 1px;position:absolute ; right: 0;bottom:0;">
+                            <div style="width:100%; border:1px solid black; font-size:7px">
+                              PAQUETE NO°:
+                              <h6 style="text-align:center">
+                                <t t-esc="dicc_etiquetas[e]['paquetes'][paquete]['numero_paquete']"/>
+                              </h6>
+                            </div>
+                            <div style="width:100%; border:1px solid black; font-size:7px">
+                              DE:
+                              <h6 style="text-align:center">
+                                <STRONG><t t-esc="dicc_etiquetas[e]['numero_paquetes']"/></STRONG>
+                              </h6>
+                            </div>
+                          </div>
 
-                        <tr style="border:1px solid white; border-top:1px solid white">
-                          <td style="border-top:1px solid black" colspan="4">
-                            <strong><span t-esc="dicc_etiquetas[e]['lista_materiales_join']"/></strong>
-                          </td>
+                        </div>                        
+                        
+                        
+                        
+                    </t>
+                    <t t-else="">
+                            
+                            <div style="width:10.1cm; height:8.90cm; float:left; margin-bottom:1cm; position: relative">
+                              
+                              <div style="width:100%; height:auto;font-size: 7px;">
+                                <table style="width:100%; border:0px solid white;font-size: 7px;">
+                                  <tr>
+                                    <td>
+                                      <center><img t-if="dicc_etiquetas[e]['pedido'].company_id.logo" t-att-src="image_data_uri(dicc_etiquetas[e]['pedido'].company_id.logo)" alt="Logo" style="width:60%;margin-top:15px"/></center>
+                                    </td>
+                                    <td style="text-align:left">
+                                      <span t-field="dicc_etiquetas[e]['pedido'].company_id.street"/><span t-field="dicc_etiquetas[e]['pedido'].company_id.street2"/><br/>
+                                      C.P. <span t-field="dicc_etiquetas[e]['pedido'].company_id.zip"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.city"/> - <span t-field="dicc_etiquetas[e]['pedido'].company_id.state_id.name"/> <span t-field="dicc_etiquetas[e]['pedido'].company_id.website"/> <br/>
+                                      T. <span t-field="dicc_etiquetas[e]['pedido'].company_id.phone"/>
+                                    </td>
+                                    <td style="padding-left:7px">
+                                      TRANSPORTISTA <br/>
+                                      <span t-esc="dicc_etiquetas[e]['pedido'].x_studio_transportista"/>
+                                    </td>
+                                  </tr>
+                                </table>
 
-                        </tr>
-                        <tr style="border:1px solid white">
-                          <td>
-                            Cant.
-                          </td>
-                          <td>
-                            Código
-                          </td>
-                          <td>
-                            Descripción
-                          </td>
-                        </tr>
+                              </div>
 
-                        <t t-foreach="dicc_etiquetas[e]['paquetes'][paquete]['moves']" t-as="linea">
-                          <tr style="border:1px solid white">
-                            <td style="border:1px solid white">
-                              <t t-esc="linea.product_uom_qty"/>
-                            </td>
-                            <td style="border:1px solid white">
-                              <t t-esc="linea.product_id.default_code"/>
-                            </td>
-                            <td style="border:1px solid white">
-                              <t t-esc="linea.product_id.name"/>
-                            </td>
-                          </tr>
-                        </t>
+                              <div style="width:100%; height:auto">
+                                <table style="width:100%; font-size: 7px; text-align:center">
+                                  <tr>
+                                    <td text-align="center" font-size="7px" style="vertical-align: middle; border:1px solid white; border-right:1px solid black">
+                                      <t style="font-size:7px" t-esc="fecha_hoy"/>
+                                    </td>
+                                    <td text-align="center" style="font-size:7px">
+                                      <STRONG>PLATAFORMA </STRONG>
+                                       <br/>
+                                        <t t-if="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma">
+                                            <span t-field="dicc_etiquetas[e]['pedido'].x_studio_pedido_plataforma" style="font-size:10px"/>
+                                        </t>
+                                        <t t-else="">
+                                            <span t-esc="dicc_etiquetas[e]['plataforma']" style="font-size:10px"/>
+                                        </t>
+                                    </td>
+                                    <td text-align="center" style="font-size:7px">
+                                      <STRONG>OPERADOR | EMPACADOR</STRONG><br/>
+                                       <span t-field="dicc_etiquetas[e]['pedido'].x_studio_operador_empacador" style="font-size:10px"/>
+                                    </td>
+                                    <td text-align="center" style="font-size:7px">
+                                      <STRONG>PEDIDO N</STRONG><br/>
+                                      <h6><t t-esc="dicc_etiquetas[e]['pedido'].name"/></h6>
+                                    </td>
+                                  </tr>
+                                </table>
 
-                      </table>
+                              </div>
 
-                    <div style="width:100px; border:1px solid black;  margin-top: 1px;position:absolute ; right: 0;bottom:0;">
-                        <div style="width:100%; border:1px solid black; font-size:7px">
-                          Paquete no°:
-                          <h6 style="text-align:center">
-                            <t t-esc="dicc_etiquetas[e]['paquetes'][paquete]['numero_paquete']"/>
-                          </h6>
-                        </div>
-                        <div style="width:100%; border:1px solid black; font-size:7px">
-                          De:
-                          <h6 style="text-align:center">
-                            <STRONG><t t-esc="dicc_etiquetas[e]['numero_paquetes']"/></STRONG>
-                          </h6>
-                        </div>
-                      </div>
+                              <div style="width:100%; height:auto; border-top: 1px solid black; ; border-bottom: 1px solid black; text-align:center; margin-bottom:7px">
+                                <h7 text-align="center">
+                                  DESTINATARIO
+                                </h7>
+                              </div>
 
-                    </div>
+                              <div style="height:auto; width:100%">
+                                <div style="width:20%; height: auto; float:left">
+                                </div>
+                                <div style="width:80%; height: auto; float:right">
+                                  <table style="width:99%; border: 0px solid white;font-size:10px;">
+                                    <tr>
+                                      <td>NOMBRE:</td>
+                                      <td>
+                                        <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.name.upper()"/>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>DIRECCIÓN:</td>
+                                      <td>
+                                        <t t-esc="dicc_etiquetas[e]['direccion_texto'].upper()"/> C.P. <span t-esc="dicc_etiquetas[e]['pedido'].partner_id.zip"/>
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td>TELÉFONO:</td>
+                                      <td>
+                                        <t t-esc="dicc_etiquetas[e]['pedido'].partner_id.phone"/>
+                                      </td>
+                                      <td style="text-align:center;">
+                                        <STRONG>
+                                          <!-- <t t-esc="dicc_etiquetas[o.id]['names']"/> -->
+                                        </STRONG>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
+
+                              </div>
+                                <br/>
+                                <br/>
+                              <table style="width:99%; font-size:7px; border:none; margin:auto; float:center">
+
+                                <tr style="border:1px solid white; border-top:1px solid white">
+                                  <td style="border-top:1px solid black" colspan="4">
+                                    <strong><span t-esc="dicc_etiquetas[e]['lista_materiales_join']"/></strong>
+                                  </td>
+
+                                </tr>
+                                <tr style="border:1px solid white">
+                                  <td>
+                                    Cant.
+                                  </td>
+                                  <td>
+                                    Código
+                                  </td>
+                                  <td>
+                                    Descripción
+                                  </td>
+                                </tr>
+
+                                <t t-foreach="dicc_etiquetas[e]['paquetes'][paquete]['moves']" t-as="linea">
+                                  <tr style="border:1px solid white">
+                                    <td style="border:1px solid white">
+                                      <t t-esc="linea.product_uom_qty"/>
+                                    </td>
+                                    <td style="border:1px solid white">
+                                      <t t-esc="linea.product_id.default_code"/>
+                                    </td>
+                                    <td style="border:1px solid white">
+                                      <t t-esc="linea.product_id.name"/>
+                                    </td>
+                                  </tr>
+                                </t>
+
+                              </table>
+
+                            <div style="width:100px; border:1px solid black;  margin-top: 1px;position:absolute ; right: 0;bottom:0;">
+                                <div style="width:100%; border:1px solid black; font-size:7px">
+                                  PAQUETE NO°:
+                                  <h6 style="text-align:center">
+                                    <t t-esc="dicc_etiquetas[e]['paquetes'][paquete]['numero_paquete']"/>
+                                  </h6>
+                                </div>
+                                <div style="width:100%; border:1px solid black; font-size:7px">
+                                  DE:
+                                  <h6 style="text-align:center">
+                                    <STRONG><t t-esc="dicc_etiquetas[e]['numero_paquetes']"/></STRONG>
+                                  </h6>
+                                </div>
+                              </div>
+
+                            </div>                        
+                        
+                        
+                    </t>                      
+                      
+                      
 
                   </t>
               </t>
-
-
-
-           <!-- </t>-->
 
           </div>
         </div>
