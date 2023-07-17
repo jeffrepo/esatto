@@ -9,6 +9,7 @@
     """Etiquetas personalizadas""",
     'depends': ['sale'],
     'data': [
+        'views/sale_order_views.xml',
         'report/report.xml',
         'report/formato_etiqueta_view.xml'
     ],

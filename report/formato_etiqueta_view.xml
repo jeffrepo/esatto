@@ -7,15 +7,15 @@
         <t t-set="data_report_header_spacing" t-value="9"/>
         <div class="article">
           <div class="page">
-              <div style="height:1.5cm"/>
+              <div style="height:0.4cm"/>
               <t t-foreach="dicc_etiquetas" t-as="e">
                   <t t-foreach="dicc_etiquetas[e]['paquetes']" t-as="paquete">
-                    
-                    
+
+
                     <t t-if="dicc_etiquetas[e]['paquetes'][paquete]['correr_espacio_paquete'] == 2">
-                        
+
                         <div style="width:10.1cm; height:8.90cm; float:left; margin-bottom:1cm;margin-left:2.25cm;position: relative">
-                          
+
                           <div style="width:100%; height:auto;font-size: 7px;">
                             <table style="width:100%; border:0px solid white;font-size: 7px;">
                               <tr>
@@ -88,6 +88,14 @@
                                     <t t-esc="dicc_etiquetas[e]['direccion_texto'].upper()"/> C.P. <span t-esc="dicc_etiquetas[e]['pedido'].partner_id.zip"/>
                                   </td>
                                 </tr>
+                                <t t-if="dicc_etiquetas[e]['pedido'].referencia_entrega">
+                                    <tr>
+                                      <td>REFERENCIA:</td>
+                                      <td>
+                                        <t t-esc="dicc_etiquetas[e]['pedido'].referencia_entrega"/>
+                                      </td>
+                                    </tr>
+                                </t>
                                 <tr>
                                   <td>TELÉFONO:</td>
                                   <td>
@@ -156,15 +164,15 @@
                             </div>
                           </div>
 
-                        </div>                        
-                        
-                        
-                        
+                        </div>
+
+
+
                     </t>
                     <t t-else="">
-                            
+
                             <div style="width:10.1cm; height:8.90cm; float:left; margin-bottom:1cm; position: relative">
-                              
+
                               <div style="width:100%; height:auto;font-size: 7px;">
                                 <table style="width:100%; border:0px solid white;font-size: 7px;">
                                   <tr>
@@ -237,6 +245,14 @@
                                         <t t-esc="dicc_etiquetas[e]['direccion_texto'].upper()"/> C.P. <span t-esc="dicc_etiquetas[e]['pedido'].partner_id.zip"/>
                                       </td>
                                     </tr>
+                                    <t t-if="dicc_etiquetas[e]['pedido'].referencia_entrega">
+                                        <tr>
+                                          <td>REFERENCIA:</td>
+                                          <td>
+                                            <t t-esc="dicc_etiquetas[e]['pedido'].referencia_entrega"/>
+                                          </td>
+                                        </tr>
+                                    </t>
                                     <tr>
                                       <td>TELÉFONO:</td>
                                       <td>
@@ -305,12 +321,12 @@
                                 </div>
                               </div>
 
-                            </div>                        
-                        
-                        
-                    </t>                      
-                      
-                      
+                            </div>
+
+
+                    </t>
+
+
 
                   </t>
               </t>
