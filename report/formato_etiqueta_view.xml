@@ -136,7 +136,7 @@
                             <t t-foreach="dicc_etiquetas[e]['paquetes'][paquete]['moves']" t-as="linea">
                               <tr style="border:1px solid white">
                                 <td style="border:1px solid white">
-                                  <t t-esc="linea.product_uom_qty"/>
+                                  <t t-esc="math_trunc(linea.product_uom_qty)"/>
                                 </td>
                                 <td style="border:1px solid white">
                                   <t t-esc="linea.product_id.default_code"/>
@@ -293,7 +293,7 @@
                                 <t t-foreach="dicc_etiquetas[e]['paquetes'][paquete]['moves']" t-as="linea">
                                   <tr style="border:1px solid white">
                                     <td style="border:1px solid white">
-                                      <t t-esc="linea.product_uom_qty"/>
+                                      <t t-esc="math_trunc(linea.product_uom_qty)"/>
                                     </td>
                                     <td style="border:1px solid white">
                                       <t t-esc="linea.product_id.default_code"/>
@@ -320,7 +320,11 @@
                                   </h6>
                                 </div>
                               </div>
-
+                              <t t-if="dicc_etiquetas[e]['pedido'].x_studio_fecha_impresin_etiqueta">  
+                                  <div style="width:100px; margin-top: 1px;position:absolute ; left: 0;bottom:0;font-size:7px">
+                                      Fecha y hora de impresión: <span t-esc="dicc_etiquetas[e]['pedido'].x_studio_fecha_impresin_etiqueta"/>
+                                  </div>
+                              </t>
                             </div>
 
 
