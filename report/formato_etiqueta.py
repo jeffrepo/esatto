@@ -4,6 +4,7 @@ from odoo import api, models
 from datetime import date
 from datetime import datetime, date, time, timedelta
 import re
+import math
 from html.parser import HTMLParser
 import logging
 from bs4 import BeautifulSoup
@@ -12,6 +13,10 @@ class ReportEsattoEtiqueta(models.AbstractModel):
     _name = 'reporte.esatto.etiqueta'
     nombre_reporte = ''
 
+    def math_trunc(self, numero):
+        numero_truncado = math.trunc(numero)
+        return numero_truncado
+    
     @api.model
     def _get_report_values(self, docids, data=None):
         model = 'sale.order'
@@ -93,7 +98,8 @@ class ReportEsattoEtiqueta(models.AbstractModel):
             'doc_ids': docids,
             'doc_model': model,
             'docs': docs,
-            'dicc_etiquetas':dicc_etiquetas
+            'dicc_etiquetas':dicc_etiquetas,
+            'math_trunc': self.math_trunc,
         }
 
 
