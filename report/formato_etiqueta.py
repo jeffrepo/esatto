@@ -27,6 +27,7 @@ class ReportEsattoEtiqueta(models.AbstractModel):
 
 
         paquetes = []
+        lista_paquetes = []
         correr_espacio_paquete = 0
         for sale in docs:
             direccion_texto = ""
@@ -61,10 +62,16 @@ class ReportEsattoEtiqueta(models.AbstractModel):
                                     dicc_etiquetas[sale.id]['paquetes'][linea_m.x_studio_paquete] = {'numero_paquete': linea_m.x_studio_paquete,'moves':[],'plataforma': sale.origin.split('-')[1],'direccion_texto': direccion_texto[10:], 'pedido': sale}
 
                                 dicc_etiquetas[sale.id]['paquetes'][linea_m.x_studio_paquete]['moves'].append(linea_m)
-                                if correr_espacio_paquete % 2 == 0:
+                                llave_linea = str(envio) + '_'+ str(linea_m.x_studio_paquete)
+                                if llave_linea not in lista_paquetes:
+                                    lista_paquetes.append(llave_linea)
+                                    
+                                if lista_paquetes.index(llave_linea) % 2 == 0:
                                     dicc_etiquetas[sale.id]['paquetes'][linea_m.x_studio_paquete]['correr_espacio_paquete'] = 1
+                                    logging.warning("correr espacio paquete 1")
                                 else:
                                     dicc_etiquetas[sale.id]['paquetes'][linea_m.x_studio_paquete]['correr_espacio_paquete'] = 2
+                                    logging.warning("correr espacio paquete 2")
 
                     correr_espacio_paquete += 1
 
